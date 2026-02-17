@@ -5,74 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI semināra jautājumi</title>
     <style>
-        /* CleanR Brand: #141414 (dark), #ffffff (white), #1033cf (accent blue) */
-        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap');
+        /* CleanR Brand: pelēko toņu palete ar Montserrat fontu */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Montserrat', Verdana, -apple-system, sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #141414;
-            background-image: url('https://cleanrgrupa.lv/wp-content/uploads/2022/09/geetanjal-khanna-8CwoHpZe3qE-unsplash-1.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background: #F2F2F2;
             padding: 20px;
             overflow: hidden;
+            position: relative;
         }
+        /* CleanR grafiskais raksts - dekoratīvie apļi */
         body::before {
             content: '';
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(20, 20, 20, 0.55);
-            z-index: 1;
+            top: -120px; right: -80px;
+            width: 400px; height: 400px;
+            border-radius: 50%;
+            background: #D9D9D9;
+            z-index: 0;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -100px; left: -60px;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            background: #C6C6C6;
+            z-index: 0;
         }
         .container {
-            background: rgba(255, 255, 255, 0.97);
+            background: #fff;
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
             width: 100%;
             max-width: 480px;
             position: relative;
             z-index: 2;
         }
+        .brand-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #D9D9D9;
+        }
+        .brand-header img {
+            height: 36px;
+            width: auto;
+        }
         h1 {
-            font-family: 'DM Serif Display', Georgia, serif;
-            font-size: 24px;
+            font-family: 'Montserrat', Verdana, sans-serif;
+            font-size: 22px;
             margin-bottom: 8px;
-            color: #141414;
-            font-weight: 400;
+            color: #323232;
+            font-weight: 700;
+            letter-spacing: -0.3px;
         }
         .subtitle {
             font-size: 14px;
-            color: #666;
+            color: #646464;
             margin-bottom: 24px;
         }
         label {
             display: block;
             font-size: 14px;
-            font-weight: 500;
-            color: #333;
+            font-weight: 600;
+            color: #464646;
             margin-bottom: 6px;
         }
         input, textarea {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
+            border: 1px solid #C6C6C6;
             border-radius: 8px;
             font-size: 16px;
             font-family: inherit;
             transition: border-color 0.2s;
             margin-bottom: 16px;
+            background: #F2F2F2;
         }
         input:focus, textarea:focus {
             outline: none;
-            border-color: #1033cf;
-            box-shadow: 0 0 0 3px rgba(16,51,207,0.1);
+            border-color: #464646;
+            box-shadow: 0 0 0 3px rgba(150,150,150,0.15);
+            background: #fff;
         }
         textarea {
             height: 140px;
@@ -82,7 +106,7 @@
         button {
             width: 100%;
             padding: 14px;
-            background: #1033cf;
+            background: #323232;
             color: white;
             border: none;
             border-radius: 8px;
@@ -91,10 +115,11 @@
             cursor: pointer;
             transition: background 0.2s;
             font-family: inherit;
+            letter-spacing: 0.5px;
         }
-        button:hover { background: #0c28a3; }
+        button:hover { background: #464646; }
         button:disabled {
-            background: #8a9ad4;
+            background: #969696;
             cursor: not-allowed;
         }
         .success {
@@ -103,10 +128,10 @@
         }
         .success .checkmark { font-size: 48px; margin-bottom: 16px; }
         .success h2 {
-            font-family: 'DM Serif Display', Georgia, serif;
-            color: #141414; margin-bottom: 8px; font-weight: 400;
+            font-family: 'Montserrat', Verdana, sans-serif;
+            color: #323232; margin-bottom: 8px; font-weight: 700;
         }
-        .success p { color: #666; margin-bottom: 24px; }
+        .success p { color: #646464; margin-bottom: 24px; }
         .error {
             background: #fff0f0;
             color: #c00;
@@ -124,7 +149,7 @@
             top: 0; left: 0;
             width: 100vw; height: 100vh;
             z-index: 9999;
-            background: #141414;
+            background: #323232;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -136,18 +161,18 @@
             width: 100%; height: 100%;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            background: #141414;
+            background: #323232;
         }
         #countdown-screen h2 {
-            font-family: 'DM Serif Display', Georgia, serif;
-            font-size: 28px; color: #fff;
+            font-family: 'Montserrat', Verdana, sans-serif;
+            font-size: 26px; color: #fff;
             margin-bottom: 8px; text-align: center; padding: 0 20px;
-            font-weight: 400;
+            font-weight: 700;
         }
         #countdown-screen .sub { font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 24px; }
         .countdown-number {
             font-size: 120px; font-weight: 900;
-            color: #1033cf; line-height: 1;
+            color: #969696; line-height: 1;
             animation: countPulse 0.8s ease-in-out;
         }
         @keyframes countPulse {
@@ -173,10 +198,7 @@
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
             pointer-events: none;
-            background: #141414;
-            background-image: url('https://cleanrgrupa.lv/wp-content/uploads/2022/09/geetanjal-khanna-8CwoHpZe3qE-unsplash-1.jpg');
-            background-size: cover;
-            background-position: center;
+            background: #F2F2F2;
             z-index: -1;
         }
         #clean-layer .clean-text {
@@ -187,21 +209,21 @@
         }
         #clean-layer .sparkle { font-size: 48px; margin-bottom: 8px; }
         #clean-layer h2 {
-            font-family: 'DM Serif Display', Georgia, serif;
-            font-size: 36px; color: #141414; margin-bottom: 4px; font-weight: 400;
+            font-family: 'Montserrat', Verdana, sans-serif;
+            font-size: 36px; color: #323232; margin-bottom: 4px; font-weight: 700;
         }
-        #clean-layer p { font-size: 16px; color: #666; letter-spacing: 2px; text-transform: uppercase; }
+        #clean-layer p { font-size: 16px; color: #646464; letter-spacing: 2px; text-transform: uppercase; }
 
         #timer-hud {
             position: absolute; top: 20px; left: 50%;
             transform: translateX(-50%);
-            background: rgba(20,20,20,0.85);
+            background: rgba(50,50,50,0.9);
             color: #fff; padding: 8px 24px;
             border-radius: 30px; font-size: 28px;
             font-weight: 800; z-index: 20;
             font-variant-numeric: tabular-nums;
             min-width: 120px; text-align: center;
-            border: 2px solid rgba(16,51,207,0.4);
+            border: 2px solid rgba(150,150,150,0.4);
         }
         #progress-bar-wrap {
             position: absolute; bottom: 30px; left: 50%;
@@ -212,7 +234,7 @@
         }
         #progress-bar {
             height: 100%; width: 0%;
-            background: #1033cf; border-radius: 3px;
+            background: #969696; border-radius: 3px;
             transition: width 0.2s;
         }
         #wipe-hint {
@@ -232,27 +254,24 @@
         #result-screen {
             z-index: 10000;
             text-align: center; padding: 20px;
-            background: #141414;
-            background-image: url('https://cleanrgrupa.lv/wp-content/uploads/2022/09/geetanjal-khanna-8CwoHpZe3qE-unsplash-1.jpg');
-            background-size: cover;
-            background-position: center;
+            background: #323232;
         }
         #result-screen::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(20, 20, 20, 0.75);
+            background: transparent;
         }
         #result-screen > * { position: relative; z-index: 1; }
         #result-screen .trophy { font-size: 72px; margin-bottom: 12px; }
         #result-screen h2 {
-            font-family: 'DM Serif Display', Georgia, serif;
-            font-size: 36px; color: #fff; margin-bottom: 8px; font-weight: 400;
+            font-family: 'Montserrat', Verdana, sans-serif;
+            font-size: 36px; color: #fff; margin-bottom: 8px; font-weight: 700;
         }
         #result-screen .time-result {
             font-size: 64px; font-weight: 900;
-            color: #1033cf; margin-bottom: 16px;
-            text-shadow: 0 0 30px rgba(16,51,207,0.4);
+            color: #D9D9D9; margin-bottom: 16px;
+            text-shadow: none;
         }
         #result-screen .comparison {
             font-size: 16px; color: rgba(255,255,255,0.8); margin-bottom: 36px;
@@ -265,8 +284,8 @@
             border-radius: 6px; font-weight: 600; color: #fff;
         }
         #result-screen .comparison .you-tag {
-            background: rgba(16,51,207,0.3);
-            border: 1px solid rgba(16,51,207,0.5);
+            background: rgba(150,150,150,0.3);
+            border: 1px solid rgba(150,150,150,0.5);
         }
         .btn-outline {
             display: inline-block;
@@ -276,7 +295,7 @@
             cursor: pointer; transition: all 0.2s;
             text-decoration: none; font-family: inherit;
         }
-        .btn-outline:hover { background: #fff; color: #141414; }
+        .btn-outline:hover { background: #fff; color: #323232; }
 
         /* CleanR watermark */
         .cleanr-mark {
@@ -294,6 +313,9 @@
     <div class="container">
         <!-- FORMA -->
         <div id="form-view">
+            <div class="brand-header">
+                <img src="https://cleanrgrupa-id.brandbox.digital/storage/app/media/Logo/HorizontalaisLogo.svg" alt="CleanR Grupa" style="filter: brightness(0);">
+            </div>
             <h1>Ko tu vēlies uzzināt piektdienas AI seminārā?</h1>
             <p class="subtitle">Ieraksti savu jautājumu un mēs to izskatīsim seminārā.</p>
             <div id="error-msg" class="error"></div>
@@ -491,7 +513,7 @@
 
             wipeHint.style.display = 'block';
             progressBar.style.width = '0%';
-            progressBar.style.background = '#1033cf';
+            progressBar.style.background = '#969696';
 
             gameStartTime = performance.now();
             timerHud.textContent = '0.0s';
@@ -636,7 +658,7 @@
             const pct = Math.min(100, Math.round(cleaned * 100));
             progressBar.style.width = pct + '%';
             if (pct > 80) progressBar.style.background = '#4CAF50';
-            else if (pct > 50) progressBar.style.background = '#1565C0';
+            else if (pct > 50) progressBar.style.background = '#646464';
 
             if (pct >= 92) {
                 gameActive = false;
@@ -689,7 +711,7 @@
                 const p = all[i];
                 const medal = medals[i];
                 if (p.isPlayer) {
-                    html += '<div style="margin: 6px 0;">' + medal + ' <span class="name-tag you-tag">' + escapeHtml(p.name) + '</span> — <strong style="color:#1033cf;">' + p.time.toFixed(1) + 's</strong> ← tu!</div>';
+                    html += '<div style="margin: 6px 0;">' + medal + ' <span class="name-tag you-tag">' + escapeHtml(p.name) + '</span> — <strong style="color:#fff;">' + p.time.toFixed(1) + 's</strong> ← tu!</div>';
                 } else {
                     html += '<div style="margin: 6px 0;">' + medal + ' <span class="name-tag">' + escapeHtml(p.name) + '</span> — ' + p.time.toFixed(1) + 's</div>';
                 }
