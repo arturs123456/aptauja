@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sazinies ar mums</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f0f2f5;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 480px;
+        }
+        h1 {
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+        .subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 24px;
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 6px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+            margin-bottom: 16px;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #4a6cf7;
+            box-shadow: 0 0 0 3px rgba(74,108,247,0.1);
+        }
+        textarea {
+            height: 140px;
+            resize: vertical;
+        }
+        /* Honeypot — hidden from humans, visible to bots */
+        .hp { position: absolute; left: -9999px; }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #4a6cf7;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover { background: #3b5de7; }
+        button:disabled {
+            background: #a0b0f0;
+            cursor: not-allowed;
+        }
+        .success {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .success .checkmark {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        .success h2 {
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+        .success p {
+            color: #666;
+            margin-bottom: 24px;
+        }
+        .success a {
+            color: #4a6cf7;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .success a:hover { text-decoration: underline; }
+        .error {
+            background: #fff0f0;
+            color: #c00;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 14px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- FORMA -->
+        <div id="form-view">
+            <h1>Sazinies ar mums</h1>
+            <p class="subtitle">Ieraksti savu ziņu un mēs to saņemsim.</p>
+
+            <div id="error-msg" class="error"></div>
+
+            <form name="kontaktforma">
+                <!-- Honeypot field for bot protection -->
+                <input type="text" name="mobile_number" class="hp" tabindex="-1" autocomplete="off">
+                <!-- Hidden: sheet name -->
+                <input type="hidden" name="sheet_name" value="Sheet1">
+
+                <label for="vards">Vārds (nav obligāts)</label>
+                <input type="text" id="vards" name="vards" placeholder="Tavs vārds">
+
+                <label for="zinojums">Ziņa *</label>
+                <textarea id="zinojums" name="zinojums" placeholder="Raksti šeit..." required></textarea>
+
+                <button type="submit" id="submit-btn">Nosūtīt</button>
+            </form>
+        </div>
+
+        <!-- PALDIES -->
+        <div id="success-view" class="success" style="display:none;">
+            <div class="checkmark">&#10003;</div>
+            <h2>Paldies!</h2>
+            <p>Tava ziņa ir nosūtīta.</p>
+            <a href="#" onclick="resetForm(); return false;">Nosūtīt vēl vienu</a>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // INSTRUKCIJA: Nomaini šo URL uz savu Google Apps Script URL
+        // ============================================================
+        const SCRIPT_URL = 'IELIEC_SAVU_GOOGLE_APPS_SCRIPT_URL_SEIT';
+
+        const form = document.forms['kontaktforma'];
+        const submitBtn = document.getElementById('submit-btn');
+        const errorMsg = document.getElementById('error-msg');
+        const formView = document.getElementById('form-view');
+        const successView = document.getElementById('success-view');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validation
+            if (!form.zinojums.value.trim()) {
+                showError('Lūdzu ieraksti ziņu.');
+                return;
+            }
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sūta...';
+            errorMsg.style.display = 'none';
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: new FormData(form)
+            })
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
+                if (data.result === 'success') {
+                    formView.style.display = 'none';
+                    successView.style.display = 'block';
+                } else {
+                    showError('Kļūda: ' + (data.error || 'Nezināma kļūda'));
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Nosūtīt';
+                }
+            })
+            .catch(function(err) {
+                showError('Neizdevās nosūtīt. Pārbaudi interneta savienojumu.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Nosūtīt';
+            });
+        });
+
+        function showError(msg) {
+            errorMsg.textContent = msg;
+            errorMsg.style.display = 'block';
+        }
+
+        function resetForm() {
+            form.reset();
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Nosūtīt';
+            errorMsg.style.display = 'none';
+            successView.style.display = 'none';
+            formView.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
