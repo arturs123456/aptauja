@@ -173,18 +173,12 @@
 
             fetch(SCRIPT_URL, {
                 method: 'POST',
-                body: new FormData(form)
+                body: new FormData(form),
+                mode: 'no-cors'
             })
-            .then(function(response) { return response.json(); })
-            .then(function(data) {
-                if (data.result === 'success') {
-                    formView.style.display = 'none';
-                    successView.style.display = 'block';
-                } else {
-                    showError('Kļūda: ' + (data.error || 'Nezināma kļūda'));
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Nosūtīt';
-                }
+            .then(function() {
+                formView.style.display = 'none';
+                successView.style.display = 'block';
             })
             .catch(function(err) {
                 showError('Neizdevās nosūtīt. Pārbaudi interneta savienojumu.');
