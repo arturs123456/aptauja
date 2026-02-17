@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sazinies ar mums</title>
+    <title>AI semināra jautājumi</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -115,8 +115,8 @@
     <div class="container">
         <!-- FORMA -->
         <div id="form-view">
-            <h1>Sazinies ar mums</h1>
-            <p class="subtitle">Ieraksti savu ziņu un mēs to saņemsim.</p>
+            <h1>Ko tu vēlies uzzināt piektdienas AI seminārā?</h1>
+            <p class="subtitle">Ieraksti savu jautājumu un mēs to izskatīsim seminārā.</p>
 
             <div id="error-msg" class="error"></div>
 
@@ -129,8 +129,8 @@
                 <label for="vards">Vārds (nav obligāts)</label>
                 <input type="text" id="vards" name="vards" placeholder="Tavs vārds">
 
-                <label for="zinojums">Ziņa *</label>
-                <textarea id="zinojums" name="zinojums" placeholder="Raksti šeit..." required></textarea>
+                <label for="zinojums">Jautājums *</label>
+                <textarea id="zinojums" name="zinojums" placeholder="Raksti savu jautājumu šeit..." required></textarea>
 
                 <button type="submit" id="submit-btn">Nosūtīt</button>
             </form>
@@ -140,8 +140,8 @@
         <div id="success-view" class="success" style="display:none;">
             <div class="checkmark">&#10003;</div>
             <h2>Paldies!</h2>
-            <p>Tava ziņa ir nosūtīta.</p>
-            <a href="#" onclick="resetForm(); return false;">Nosūtīt vēl vienu</a>
+            <p>Tavs jautājums ir nosūtīts.</p>
+            <a href="#" onclick="resetForm(); return false;">Uzdot vēl vienu jautājumu</a>
         </div>
     </div>
 
@@ -162,7 +162,7 @@
 
             // Validation
             if (!form.zinojums.value.trim()) {
-                showError('Lūdzu ieraksti ziņu.');
+                showError('Lūdzu ieraksti jautājumu.');
                 return;
             }
 
