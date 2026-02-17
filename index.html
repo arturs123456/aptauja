@@ -5,38 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AI semināra jautājumi</title>
     <style>
+        /* CleanR Brand: #141414 (dark), #ffffff (white), #1033cf (accent blue) */
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap');
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #000428, #004e92, #001f3f, #0074D9);
-            background-size: 300% 300%;
-            animation: gradientShiftH 8s ease-in-out infinite;
+            background: #141414;
+            background-image: url('https://cleanrgrupa.lv/wp-content/uploads/2022/09/geetanjal-khanna-8CwoHpZe3qE-unsplash-1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             padding: 20px;
             overflow: hidden;
         }
-        @keyframes gradientShiftH {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(20, 20, 20, 0.55);
+            z-index: 1;
         }
         .container {
-            background: white;
+            background: rgba(255, 255, 255, 0.97);
             padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 4px 32px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.4);
             width: 100%;
             max-width: 480px;
             position: relative;
             z-index: 2;
         }
         h1 {
-            font-size: 22px;
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 24px;
             margin-bottom: 8px;
-            color: #1a1a1a;
+            color: #141414;
+            font-weight: 400;
         }
         .subtitle {
             font-size: 14px;
@@ -62,19 +71,18 @@
         }
         input:focus, textarea:focus {
             outline: none;
-            border-color: #4a6cf7;
-            box-shadow: 0 0 0 3px rgba(74,108,247,0.1);
+            border-color: #1033cf;
+            box-shadow: 0 0 0 3px rgba(16,51,207,0.1);
         }
         textarea {
             height: 140px;
             resize: vertical;
         }
-        /* Honeypot — hidden from humans, visible to bots */
         .hp { position: absolute; left: -9999px; }
         button {
             width: 100%;
             padding: 14px;
-            background: #4a6cf7;
+            background: #1033cf;
             color: white;
             border: none;
             border-radius: 8px;
@@ -82,34 +90,23 @@
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s;
+            font-family: inherit;
         }
-        button:hover { background: #3b5de7; }
+        button:hover { background: #0c28a3; }
         button:disabled {
-            background: #a0b0f0;
+            background: #8a9ad4;
             cursor: not-allowed;
         }
         .success {
             text-align: center;
             padding: 40px 20px;
         }
-        .success .checkmark {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
+        .success .checkmark { font-size: 48px; margin-bottom: 16px; }
         .success h2 {
-            color: #1a1a1a;
-            margin-bottom: 8px;
+            font-family: 'DM Serif Display', Georgia, serif;
+            color: #141414; margin-bottom: 8px; font-weight: 400;
         }
-        .success p {
-            color: #666;
-            margin-bottom: 24px;
-        }
-        .success a {
-            color: #4a6cf7;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .success a:hover { text-decoration: underline; }
+        .success p { color: #666; margin-bottom: 24px; }
         .error {
             background: #fff0f0;
             color: #c00;
@@ -120,43 +117,37 @@
             display: none;
         }
 
-        /* ===== CLEANING GAME STYLES ===== */
-        #game-overlay {
+        /* ===== FULLSCREEN OVERLAY ===== */
+        .fs-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100vw; height: 100vh;
             z-index: 9999;
-            background: #fff;
+            background: #141414;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
-        #game-overlay.active {
-            display: flex;
-        }
+        .fs-overlay.active { display: flex; }
+
+        /* ===== COUNTDOWN ===== */
         #countdown-screen {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            background: #fff;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            background: #141414;
         }
         #countdown-screen h2 {
-            font-size: 28px;
-            color: #1a1a1a;
-            margin-bottom: 12px;
-            text-align: center;
-            padding: 0 20px;
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 28px; color: #fff;
+            margin-bottom: 8px; text-align: center; padding: 0 20px;
+            font-weight: 400;
         }
-        #countdown-screen .countdown-number {
-            font-size: 120px;
-            font-weight: 900;
-            color: #4a6cf7;
-            line-height: 1;
+        #countdown-screen .sub { font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 24px; }
+        .countdown-number {
+            font-size: 120px; font-weight: 900;
+            color: #1033cf; line-height: 1;
             animation: countPulse 0.8s ease-in-out;
         }
         @keyframes countPulse {
@@ -164,132 +155,138 @@
             50% { transform: scale(1.15); }
             100% { transform: scale(1); opacity: 1; }
         }
+
+        /* ===== GAME CANVAS ===== */
         #game-canvas-wrap {
             display: none;
             position: relative;
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
         }
         #dirt-canvas {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
-            touch-action: none;
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            cursor: pointer; touch-action: none;
         }
         #clean-layer {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            position: absolute; top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
             pointer-events: none;
-            background: white;
+            background: #141414;
+            background-image: url('https://cleanrgrupa.lv/wp-content/uploads/2022/09/geetanjal-khanna-8CwoHpZe3qE-unsplash-1.jpg');
+            background-size: cover;
+            background-position: center;
             z-index: -1;
         }
-        #clean-layer .sparkle {
-            font-size: 64px;
-            margin-bottom: 16px;
+        #clean-layer .clean-text {
+            background: rgba(255,255,255,0.9);
+            padding: 24px 48px;
+            border-radius: 12px;
+            text-align: center;
         }
+        #clean-layer .sparkle { font-size: 48px; margin-bottom: 8px; }
         #clean-layer h2 {
-            font-size: 32px;
-            color: #1a1a1a;
-            margin-bottom: 8px;
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 36px; color: #141414; margin-bottom: 4px; font-weight: 400;
         }
-        #clean-layer p {
-            font-size: 18px;
-            color: #666;
+        #clean-layer p { font-size: 16px; color: #666; letter-spacing: 2px; text-transform: uppercase; }
+
+        #timer-hud {
+            position: absolute; top: 20px; left: 50%;
+            transform: translateX(-50%);
+            background: rgba(20,20,20,0.85);
+            color: #fff; padding: 8px 24px;
+            border-radius: 30px; font-size: 28px;
+            font-weight: 800; z-index: 20;
+            font-variant-numeric: tabular-nums;
+            min-width: 120px; text-align: center;
+            border: 2px solid rgba(16,51,207,0.4);
         }
         #progress-bar-wrap {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
+            position: absolute; bottom: 30px; left: 50%;
             transform: translateX(-50%);
-            width: 200px;
-            height: 8px;
-            background: rgba(255,255,255,0.4);
-            border-radius: 4px;
-            overflow: hidden;
-            z-index: 10;
+            width: 200px; height: 6px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px; overflow: hidden; z-index: 10;
         }
         #progress-bar {
-            height: 100%;
-            width: 0%;
-            background: #4a6cf7;
-            border-radius: 4px;
+            height: 100%; width: 0%;
+            background: #1033cf; border-radius: 3px;
             transition: width 0.2s;
         }
         #wipe-hint {
-            position: absolute;
-            top: 50%;
-            left: 50%;
+            position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            color: #fff;
-            font-size: 22px;
-            font-weight: 700;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
-            z-index: 10;
-            pointer-events: none;
-            text-align: center;
+            color: #fff; font-size: 22px; font-weight: 700;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+            z-index: 10; pointer-events: none; text-align: center;
             animation: hintPulse 1.5s ease-in-out infinite;
         }
         @keyframes hintPulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
-        #game-done-screen {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw;
-            height: 100vh;
+
+        /* ===== RESULT SCREEN ===== */
+        #result-screen {
             z-index: 10000;
-            background: #fff;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
+            text-align: center; padding: 20px;
+            background: #141414;
+            background-image: url('https://cleanrgrupa.lv/wp-content/uploads/2022/09/geetanjal-khanna-8CwoHpZe3qE-unsplash-1.jpg');
+            background-size: cover;
+            background-position: center;
         }
-        #game-done-screen.active {
-            display: flex;
+        #result-screen::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(20, 20, 20, 0.75);
         }
-        #game-done-screen .big-sparkle {
-            font-size: 80px;
-            margin-bottom: 20px;
-            animation: sparkleRotate 2s ease-in-out infinite;
+        #result-screen > * { position: relative; z-index: 1; }
+        #result-screen .trophy { font-size: 72px; margin-bottom: 12px; }
+        #result-screen h2 {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: 36px; color: #fff; margin-bottom: 8px; font-weight: 400;
         }
-        @keyframes sparkleRotate {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(10deg) scale(1.1); }
+        #result-screen .time-result {
+            font-size: 64px; font-weight: 900;
+            color: #1033cf; margin-bottom: 16px;
+            text-shadow: 0 0 30px rgba(16,51,207,0.4);
         }
-        #game-done-screen h2 {
-            font-size: 36px;
-            color: #1a1a1a;
-            margin-bottom: 12px;
+        #result-screen .comparison {
+            font-size: 16px; color: rgba(255,255,255,0.8); margin-bottom: 36px;
+            line-height: 2;
         }
-        #game-done-screen p {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 32px;
+        #result-screen .comparison .beat { color: #4CAF50; font-weight: 600; }
+        #result-screen .comparison .name-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.15); padding: 2px 12px;
+            border-radius: 6px; font-weight: 600; color: #fff;
         }
-        #game-done-screen a {
-            color: #4a6cf7;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 18px;
-            padding: 14px 32px;
-            border: 2px solid #4a6cf7;
-            border-radius: 8px;
-            transition: all 0.2s;
+        #result-screen .comparison .you-tag {
+            background: rgba(16,51,207,0.3);
+            border: 1px solid rgba(16,51,207,0.5);
         }
-        #game-done-screen a:hover {
-            background: #4a6cf7;
-            color: #fff;
+        .btn-outline {
+            display: inline-block;
+            padding: 14px 32px; background: transparent;
+            color: #fff; border: 2px solid #fff;
+            border-radius: 8px; font-size: 16px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s;
+            text-decoration: none; font-family: inherit;
+        }
+        .btn-outline:hover { background: #fff; color: #141414; }
+
+        /* CleanR watermark */
+        .cleanr-mark {
+            position: fixed;
+            bottom: 16px; right: 20px;
+            color: rgba(255,255,255,0.25);
+            font-size: 12px; font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase;
+            z-index: 10001;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -299,26 +296,18 @@
         <div id="form-view">
             <h1>Ko tu vēlies uzzināt piektdienas AI seminārā?</h1>
             <p class="subtitle">Ieraksti savu jautājumu un mēs to izskatīsim seminārā.</p>
-
             <div id="error-msg" class="error"></div>
-
             <form name="kontaktforma">
-                <!-- Honeypot field for bot protection -->
                 <input type="text" name="mobile_number" class="hp" tabindex="-1" autocomplete="off">
-                <!-- Hidden: sheet name -->
                 <input type="hidden" name="sheet_name" value="Sheet1">
-
                 <label for="vards">Vārds (nav obligāts)</label>
                 <input type="text" id="vards" name="vards" placeholder="Tavs vārds">
-
                 <label for="zinojums">Jautājums *</label>
                 <textarea id="zinojums" name="zinojums" placeholder="Raksti savu jautājumu šeit..." required></textarea>
-
                 <button type="submit" id="submit-btn">Nosūtīt</button>
             </form>
         </div>
 
-        <!-- PALDIES (brief, then game starts) -->
         <div id="success-view" class="success" style="display:none;">
             <div class="checkmark">&#10003;</div>
             <h2>Paldies!</h2>
@@ -326,19 +315,23 @@
         </div>
     </div>
 
-    <!-- ===== CLEANING GAME OVERLAY ===== -->
-    <div id="game-overlay">
+    <!-- ===== GAME OVERLAY ===== -->
+    <div id="game-overlay" class="fs-overlay">
         <div id="countdown-screen">
-            <h2>NOTĪRI VISU EKRĀNU! 🧹</h2>
+            <h2>NOTĪRI EKRĀNU ĀTRĀK PAR KOLĒĢIEM! 🧹</h2>
+            <p class="sub">Tīri pēc iespējas ātrāk!</p>
             <div class="countdown-number" id="countdown-num">3</div>
         </div>
         <div id="game-canvas-wrap">
             <div id="clean-layer">
-                <div class="sparkle">✨</div>
-                <h2>Tīrs!</h2>
-                <p>CleanR ✓</p>
+                <div class="clean-text">
+                    <div class="sparkle">✨</div>
+                    <h2>Tīrs!</h2>
+                    <p>CleanR</p>
+                </div>
             </div>
             <canvas id="dirt-canvas"></canvas>
+            <div id="timer-hud">0.0s</div>
             <div id="progress-bar-wrap">
                 <div id="progress-bar"></div>
             </div>
@@ -346,18 +339,18 @@
         </div>
     </div>
 
-    <!-- ===== DONE SCREEN ===== -->
-    <div id="game-done-screen">
-        <div class="big-sparkle">✨</div>
-        <h2>Ideāli tīrs!</h2>
-        <p>Tu notīrīji visu ekrānu! 🧹🪣</p>
-        <a href="#" id="back-to-form-btn">Uzdot vēl vienu jautājumu</a>
+    <!-- ===== RESULT SCREEN ===== -->
+    <div id="result-screen" class="fs-overlay">
+        <div class="trophy" id="result-trophy">🏆</div>
+        <h2 id="result-title">Apsveicam!</h2>
+        <div class="time-result" id="result-time">0.0s</div>
+        <div class="comparison" id="result-comparison"></div>
+        <button class="btn-outline" id="back-to-form-btn">Uzdot vēl vienu jautājumu</button>
     </div>
 
+    <div class="cleanr-mark">CleanR Grupa</div>
+
     <script>
-        // ============================================================
-        // INSTRUKCIJA: Nomaini šo URL uz savu Google Apps Script URL
-        // ============================================================
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz3lRKOPOL4XpfAgzlWJ4IkO-TMfI1S_DOtWCNhp8ulOwnwvd3w6yxIZYZtlBOhxeDq/exec';
 
         const form = document.forms['kontaktforma'];
@@ -366,19 +359,18 @@
         const formView = document.getElementById('form-view');
         const successView = document.getElementById('success-view');
 
+        let playerName = '';
+
         form.addEventListener('submit', function(e) {
             e.preventDefault();
-
-            // Validation
             if (!form.zinojums.value.trim()) {
                 showError('Lūdzu ieraksti jautājumu.');
                 return;
             }
-
-            // Disable button
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sūta...';
             errorMsg.style.display = 'none';
+            playerName = form.vards.value.trim();
 
             fetch(SCRIPT_URL, {
                 method: 'POST',
@@ -388,7 +380,6 @@
             .then(function() {
                 formView.style.display = 'none';
                 successView.style.display = 'block';
-                // Start cleaning game after 1.5s
                 setTimeout(startCleaningGame, 1500);
             })
             .catch(function(err) {
@@ -410,10 +401,31 @@
             errorMsg.style.display = 'none';
             successView.style.display = 'none';
             formView.style.display = 'block';
-            // Hide game screens
-            document.getElementById('game-overlay').classList.remove('active');
-            document.getElementById('game-done-screen').classList.remove('active');
+            document.querySelectorAll('.fs-overlay').forEach(function(el) {
+                el.classList.remove('active');
+            });
         }
+
+        // ============================================================
+        // FAKE COLLEAGUES
+        // ============================================================
+        const colleagueNames = ['Jānis', 'Līga', 'Mārtiņš', 'Anna', 'Kārlis', 'Elīna', 'Toms', 'Ieva', 'Raivis', 'Zane'];
+        let fakeColleague1, fakeColleague2;
+
+        function initFakeColleagues() {
+            const i1 = Math.floor(Math.random() * colleagueNames.length);
+            let i2 = Math.floor(Math.random() * colleagueNames.length);
+            while (i2 === i1) i2 = Math.floor(Math.random() * colleagueNames.length);
+            fakeColleague1 = {
+                name: colleagueNames[i1],
+                time: Math.round((8 + Math.random() * 5) * 10) / 10
+            };
+            fakeColleague2 = {
+                name: colleagueNames[i2],
+                time: Math.round((13 + Math.random() * 7) * 10) / 10
+            };
+        }
+        initFakeColleagues();
 
         // ============================================================
         // CLEANING GAME
@@ -425,22 +437,25 @@
         const dirtCanvas = document.getElementById('dirt-canvas');
         const progressBar = document.getElementById('progress-bar');
         const wipeHint = document.getElementById('wipe-hint');
-        const gameDoneScreen = document.getElementById('game-done-screen');
+        const timerHud = document.getElementById('timer-hud');
 
         let dirtCtx = null;
         let isWiping = false;
         let totalDirtPixels = 0;
         let gameActive = false;
+        let gameStartTime = 0;
+        let timerInterval = null;
+        let finalTime = 0;
 
         function startCleaningGame() {
-            // Hide container
             document.querySelector('.container').style.display = 'none';
-            // Show overlay
+            document.querySelectorAll('.fs-overlay').forEach(function(el) {
+                el.classList.remove('active');
+            });
             gameOverlay.classList.add('active');
             countdownScreen.style.display = 'flex';
             gameCanvasWrap.style.display = 'none';
 
-            // Countdown 3, 2, 1
             let count = 3;
             countdownNum.textContent = count;
             countdownNum.style.animation = 'none';
@@ -471,45 +486,45 @@
             dirtCanvas.height = h;
             dirtCtx = dirtCanvas.getContext('2d');
 
-            // Draw dirt/mess all over
             drawDirt(w, h);
-
-            // Count initial dirt pixels
             totalDirtPixels = countOpaquePixels();
 
-            // Show hint
             wipeHint.style.display = 'block';
             progressBar.style.width = '0%';
+            progressBar.style.background = '#1033cf';
 
-            // Event listeners
-            dirtCanvas.addEventListener('mousedown', onWipeStart);
-            dirtCanvas.addEventListener('mousemove', onWipeMove);
-            dirtCanvas.addEventListener('mouseup', onWipeEnd);
-            dirtCanvas.addEventListener('mouseleave', onWipeEnd);
-            dirtCanvas.addEventListener('touchstart', onWipeStart, { passive: false });
-            dirtCanvas.addEventListener('touchmove', onWipeMove, { passive: false });
-            dirtCanvas.addEventListener('touchend', onWipeEnd);
-            dirtCanvas.addEventListener('touchcancel', onWipeEnd);
+            gameStartTime = performance.now();
+            timerHud.textContent = '0.0s';
+            timerInterval = setInterval(updateTimer, 100);
+
+            dirtCanvas.onmousedown = onWipeStart;
+            dirtCanvas.onmousemove = onWipeMove;
+            dirtCanvas.onmouseup = onWipeEnd;
+            dirtCanvas.onmouseleave = onWipeEnd;
+            dirtCanvas.ontouchstart = onWipeStart;
+            dirtCanvas.ontouchmove = onWipeMove;
+            dirtCanvas.ontouchend = onWipeEnd;
+            dirtCanvas.ontouchcancel = onWipeEnd;
+        }
+
+        function updateTimer() {
+            if (!gameActive) return;
+            const elapsed = (performance.now() - gameStartTime) / 1000;
+            timerHud.textContent = elapsed.toFixed(1) + 's';
         }
 
         function drawDirt(w, h) {
-            // Background mud/dirt color
             dirtCtx.fillStyle = '#5a3e1b';
             dirtCtx.fillRect(0, 0, w, h);
 
-            // Splatters and stains
             const colors = ['#3d2b0f', '#6b4423', '#8B6914', '#4a3520', '#2d1f0a', '#7a5c30', '#543d1f'];
 
-            // Big splatters
             for (let i = 0; i < 40; i++) {
-                dirtCtx.beginPath();
                 const x = Math.random() * w;
                 const y = Math.random() * h;
                 const r = 30 + Math.random() * 120;
                 dirtCtx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
                 dirtCtx.globalAlpha = 0.4 + Math.random() * 0.6;
-
-                // Irregular shape
                 dirtCtx.beginPath();
                 for (let a = 0; a < Math.PI * 2; a += 0.3) {
                     const rr = r * (0.7 + Math.random() * 0.6);
@@ -522,7 +537,6 @@
                 dirtCtx.fill();
             }
 
-            // Drip lines
             dirtCtx.globalAlpha = 0.5;
             for (let i = 0; i < 20; i++) {
                 const sx = Math.random() * w;
@@ -539,7 +553,6 @@
                 dirtCtx.stroke();
             }
 
-            // Small specks
             dirtCtx.globalAlpha = 0.7;
             for (let i = 0; i < 200; i++) {
                 dirtCtx.fillStyle = colors[Math.floor(Math.random() * colors.length)];
@@ -551,7 +564,6 @@
                 dirtCtx.fill();
             }
 
-            // Muddy fingerprints
             dirtCtx.globalAlpha = 0.3;
             for (let i = 0; i < 10; i++) {
                 const x = Math.random() * w;
@@ -563,39 +575,23 @@
             }
 
             dirtCtx.globalAlpha = 1;
-
-            // Dirt text overlay
-            dirtCtx.fillStyle = 'rgba(255,255,255,0.08)';
-            dirtCtx.font = 'bold 16px sans-serif';
+            dirtCtx.fillStyle = 'rgba(255,255,255,0.06)';
+            dirtCtx.font = 'bold 14px sans-serif';
             const dirtyWords = ['netīrs', 'dubļi', 'putekļi', '🦠', '💩', '🪳'];
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 12; i++) {
                 const word = dirtyWords[Math.floor(Math.random() * dirtyWords.length)];
                 dirtCtx.fillText(word, Math.random() * w, Math.random() * h);
             }
         }
 
-        function onWipeStart(e) {
-            e.preventDefault();
-            isWiping = true;
-            wipe(e);
-        }
-
-        function onWipeMove(e) {
-            e.preventDefault();
-            if (!isWiping || !gameActive) return;
-            wipe(e);
-        }
-
-        function onWipeEnd(e) {
-            isWiping = false;
-        }
+        function onWipeStart(e) { e.preventDefault(); isWiping = true; wipe(e); }
+        function onWipeMove(e) { e.preventDefault(); if (!isWiping || !gameActive) return; wipe(e); }
+        function onWipeEnd() { isWiping = false; }
 
         function wipe(e) {
             if (!gameActive) return;
-
             const rect = dirtCanvas.getBoundingClientRect();
             let x, y;
-
             if (e.touches && e.touches.length > 0) {
                 x = (e.touches[0].clientX - rect.left) * (dirtCanvas.width / rect.width);
                 y = (e.touches[0].clientY - rect.top) * (dirtCanvas.height / rect.height);
@@ -604,17 +600,12 @@
                 y = (e.clientY - rect.top) * (dirtCanvas.height / rect.height);
             }
 
-            // Erase in a circular area (like a sponge)
             const radius = 50;
             dirtCtx.save();
             dirtCtx.globalCompositeOperation = 'destination-out';
-
-            // Main wipe circle
             dirtCtx.beginPath();
             dirtCtx.arc(x, y, radius, 0, Math.PI * 2);
             dirtCtx.fill();
-
-            // Soft edges for natural feel
             for (let i = 0; i < 8; i++) {
                 const ox = (Math.random() - 0.5) * radius * 0.8;
                 const oy = (Math.random() - 0.5) * radius * 0.8;
@@ -623,13 +614,9 @@
                 dirtCtx.arc(x + ox, y + oy, r, 0, Math.PI * 2);
                 dirtCtx.fill();
             }
-
             dirtCtx.restore();
 
-            // Hide hint after first wipe
             wipeHint.style.display = 'none';
-
-            // Check progress
             checkProgress();
         }
 
@@ -637,7 +624,6 @@
             const imageData = dirtCtx.getImageData(0, 0, dirtCanvas.width, dirtCanvas.height);
             const data = imageData.data;
             let count = 0;
-            // Sample every 4th pixel for performance
             for (let i = 3; i < data.length; i += 16) {
                 if (data[i] > 10) count++;
             }
@@ -648,31 +634,88 @@
             const remaining = countOpaquePixels();
             const cleaned = 1 - (remaining / totalDirtPixels);
             const pct = Math.min(100, Math.round(cleaned * 100));
-
             progressBar.style.width = pct + '%';
-
-            // Change bar color based on progress
-            if (pct > 80) {
-                progressBar.style.background = '#4CAF50';
-            } else if (pct > 50) {
-                progressBar.style.background = '#8BC34A';
-            }
+            if (pct > 80) progressBar.style.background = '#4CAF50';
+            else if (pct > 50) progressBar.style.background = '#1565C0';
 
             if (pct >= 92) {
-                // Game complete!
                 gameActive = false;
-                setTimeout(showGameDone, 400);
+                clearInterval(timerInterval);
+                finalTime = Math.round(((performance.now() - gameStartTime) / 1000) * 10) / 10;
+                timerHud.textContent = finalTime.toFixed(1) + 's';
+                setTimeout(showResults, 500);
             }
         }
 
-        function showGameDone() {
-            gameOverlay.classList.remove('active');
-            gameDoneScreen.classList.add('active');
+        // ============================================================
+        // RESULTS
+        // ============================================================
+        function showResults() {
+            document.querySelectorAll('.fs-overlay').forEach(function(el) {
+                el.classList.remove('active');
+            });
+
+            const resultScreen = document.getElementById('result-screen');
+            const resultTime = document.getElementById('result-time');
+            const resultTitle = document.getElementById('result-title');
+            const resultTrophy = document.getElementById('result-trophy');
+            const resultComparison = document.getElementById('result-comparison');
+
+            resultTime.textContent = finalTime.toFixed(1) + 's';
+
+            const all = [
+                { name: playerName || 'Tu', time: finalTime, isPlayer: true },
+                { name: fakeColleague1.name, time: fakeColleague1.time, isPlayer: false },
+                { name: fakeColleague2.name, time: fakeColleague2.time, isPlayer: false }
+            ].sort(function(a, b) { return a.time - b.time; });
+
+            const playerRank = all.findIndex(function(p) { return p.isPlayer; }) + 1;
+            const beaten = 3 - playerRank;
+
+            if (playerRank === 1) {
+                resultTrophy.textContent = '🏆';
+                resultTitle.textContent = 'Neticami!';
+            } else if (playerRank === 2) {
+                resultTrophy.textContent = '💪';
+                resultTitle.textContent = 'Labi!';
+            } else {
+                resultTrophy.textContent = '🧹';
+                resultTitle.textContent = 'Izdarīts!';
+            }
+
+            let html = '';
+            const medals = ['🥇', '🥈', '🥉'];
+            for (let i = 0; i < all.length; i++) {
+                const p = all[i];
+                const medal = medals[i];
+                if (p.isPlayer) {
+                    html += '<div style="margin: 6px 0;">' + medal + ' <span class="name-tag you-tag">' + escapeHtml(p.name) + '</span> — <strong style="color:#1033cf;">' + p.time.toFixed(1) + 's</strong> ← tu!</div>';
+                } else {
+                    html += '<div style="margin: 6px 0;">' + medal + ' <span class="name-tag">' + escapeHtml(p.name) + '</span> — ' + p.time.toFixed(1) + 's</div>';
+                }
+            }
+
+            if (beaten === 2) {
+                html += '<br><span class="beat">Tu pārspēji abus kolēģus! 🎉</span>';
+            } else if (beaten === 1) {
+                html += '<br>Gandrīz! Pamēģini vēlreiz, lai apsteigtu ' + escapeHtml(all[0].name) + '!';
+            } else {
+                html += '<br>Pamēģini vēlreiz! 💪';
+            }
+
+            resultComparison.innerHTML = html;
+            resultScreen.classList.add('active');
         }
 
-        document.getElementById('back-to-form-btn').addEventListener('click', function(e) {
-            e.preventDefault();
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        document.getElementById('back-to-form-btn').addEventListener('click', function() {
             document.querySelector('.container').style.display = '';
+            initFakeColleagues();
             resetForm();
         });
     </script>
