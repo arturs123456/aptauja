@@ -12,14 +12,21 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #f0f2f5;
+            background: linear-gradient(135deg, #000428, #004e92, #001f3f, #0074D9);
+            background-size: 300% 300%;
+            animation: gradientShiftH 8s ease-in-out infinite;
             padding: 20px;
+        }
+        @keyframes gradientShiftH {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         .container {
             background: white;
             padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 32px rgba(0,0,0,0.3);
             width: 100%;
             max-width: 480px;
         }
